@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
+from datetime import date
+import psutil
 
 app = FastAPI()
 
@@ -14,9 +15,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/day", tags=["Dates"])
+@app.get("/server-info", tags=["server_info"])
 def get_day_of_week():
     """
-    Get the current day of week
+    Get the current date and load on the server side
     """
-    return datetime.now().strftime("%A")
+    loads = psutil.getloadavg()
+    current_date = date.today()
+    return {"loads": loads, "date": current_date}

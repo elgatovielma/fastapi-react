@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import InfoList from './components/InfoList';
+import ServerInfo from './components/ServerInfo';
 
 function App() {
   return (
     <div className="App">
-      <InfoList/>
+      <ServerInfo/>
     </div>
   )
 }
