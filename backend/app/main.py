@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import date
 import psutil
+from pydicom import dcmread
 
 app = FastAPI()
 
@@ -23,3 +24,12 @@ def get_day_of_week():
     loads = psutil.getloadavg()
     current_date = date.today()
     return {"loads": loads, "date": current_date}
+
+
+@app.get("/patient", tags=["patient"])
+def get_patients_name():
+    """
+    Get the patients name
+    """
+    dcm_data = dcmread('SE000001/MR000001')
+    return {"patientName": str(dcm_data[0x0010, 0x0010].value)}
