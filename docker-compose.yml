@@ -1,9 +1,10 @@
 version: '3.8'
 services:
   backend:
-    build:
-      context: ./backend/
-      dockerfile: ./Dockerfile
+    #build:
+    #  context: ./backend/
+    #  dockerfile: ./Dockerfile
+    image: vielmagalberto/dockerized-fastapi
     restart: always
     ports:
       - "127.0.0.1:8000:8000"
@@ -11,9 +12,10 @@ services:
       - 8000
 
   frontend:
-    build:
-      context: ./frontend/
-      dockerfile: ./Dockerfile
+    #build:
+    #  context: ./frontend/
+    #  dockerfile: ./Dockerfile
+    image: vielmagalberto/dockerized-react
     restart: always
     ports:
       - "127.0.0.1:3000:3000"

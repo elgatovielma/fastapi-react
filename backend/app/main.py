@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import date
 import psutil
 from pydicom import dcmread
+from pathlib import Path
 
 app = FastAPI()
 
@@ -31,5 +32,6 @@ def get_patients_name():
     """
     Get the patients name
     """
-    dcm_data = dcmread('SE000001/MR000001')
+    path = Path(__file__).parent
+    dcm_data = dcmread(str(path)+'/SE000001/MR000001')
     return {"patientName": str(dcm_data[0x0010, 0x0010].value)}
